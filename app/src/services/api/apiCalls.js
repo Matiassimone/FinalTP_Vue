@@ -3,7 +3,9 @@ import {
     GET_TOPSTREAMS_URL, 
     GET_STREAMSBYGAMEID_URL, 
     GET_STREAMBYUSERID_URL, 
-    GET_USERINFORMATION_URL} from './apiUrls'
+    GET_USERINFORMATION_URL,
+    CLIENT_ID
+} from './apiUrls'
 
 // Handle HTTP errors since fetch won't.
 function handleErrors(response) {
@@ -14,7 +16,17 @@ function handleErrors(response) {
 }
 
 function apiCall(url){
-    return fetch(url)
+    const myHeaders = new Headers();
+    myHeaders.append('Client-ID',CLIENT_ID)
+    const myInit = {
+        method: 'GET',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default' 
+
+    }
+    const request = new Request(url, myInit)
+    return fetch(request)
             .then(handleErrors)
             .then(res => res.json());
 }

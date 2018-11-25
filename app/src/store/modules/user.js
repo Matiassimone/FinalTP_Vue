@@ -1,4 +1,4 @@
-import getUserInformation from '../../services/api/apiCalls'
+import { getUserInformation } from '../../services/api/apiCalls'
 
 const module_user = ({
     
@@ -18,6 +18,8 @@ const module_user = ({
     loading: true,
     errors: []
   },
+
+  namespaced: true,
 
   mutations: {
     SUCCESS_FETCH(state, res){

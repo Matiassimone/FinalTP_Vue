@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Games from './views/Games.vue'
 import Login from './views/Login.vue'
 import StreamsByGames from './views/StreamsByGames.vue'
+import OneStream from './views/OneStream.vue'
+import TopStreams from './views/TopStreams.vue'
 import store from './store'
 
 Vue.use(Router)
@@ -35,12 +37,10 @@ const router = new Router({
       path: '/topstreams',
       name: 'topstreams',
       component: TopStreams
-    },
-    {
-
     }
   ]
 })
+/*
 router.beforeEach((to, from, next) => {
   if (to.name !== "login") {
     if (!store.state.token) {
@@ -56,4 +56,5 @@ router.beforeEach((to, from, next) => {
     }
   }
 })
+*/
 export default router

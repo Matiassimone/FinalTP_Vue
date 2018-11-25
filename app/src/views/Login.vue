@@ -18,12 +18,8 @@ export default {
     },
     methods: {
         login() {
-            authService.login(this.user, this.password)
-                .then((token) => {
-                    this.$store.commit('setToken', token);
-                    this.$router.push({name:'home'});
-                })
-                .catch((error) => console.log(error));
+            console.log(this.$router)
+           this.$router.push({name:'games'});               
         }
     }
 }

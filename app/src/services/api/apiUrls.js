@@ -1,5 +1,6 @@
 const SERVER_URL = 'https://api.twitch.tv/helix/'
 const DEFAULT_CANT = 20 ///default cant for items in the api
+export const CLIENT_ID = 'w44e8dg8ut8fvzbho0gprtdulhnvvs'
 
  const validateParams = (url,cant,cursor) => {
     if (cant) {

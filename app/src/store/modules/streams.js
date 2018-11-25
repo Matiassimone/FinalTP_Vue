@@ -1,6 +1,6 @@
-import getStreamByUserId from '../../services/api/apiCalls'
-import getStreamByGameId from '../../services/api/apiCalls'
-import getTopStreams from '../../services/api/apiCalls'
+import { getStreamByUserId } from '../../services/api/apiCalls'
+import { getStreamByGameId } from '../../services/api/apiCalls'
+import { getTopStreams } from '../../services/api/apiCalls'
 
 const module_streams = ({
 
@@ -26,6 +26,8 @@ const module_streams = ({
       loading: true
     }
   },
+
+  namespaced: true,
 
   mutations: {
     SUCCESS_FETCH_TOPSTREAMS(state, res){

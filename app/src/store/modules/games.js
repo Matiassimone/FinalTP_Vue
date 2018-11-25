@@ -1,4 +1,4 @@
-import getTopGames from '../../services/api/apiCalls'
+import { getTopGames } from '../../services/api/apiCalls'
 
 const module_games = ({
     
@@ -8,6 +8,8 @@ const module_games = ({
     errors: [],
     loading: true
   },
+
+  namespaced: true,
 
   mutations: {
     SUCCESS_FETCH(state, res){
@@ -22,12 +24,17 @@ const module_games = ({
       state.errors = err;
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)
+    },
+    
+    BEGIN_FETCH(state, err){
+      state.loading = true;
     }
   },
 
   actions: {
-    BEGIN_FETCH_GAMES({commit}, cant, cursor) {
-      state.loading = true;
+    BEGIN_FETCH_GAMES({commit}, cant, cursor) { 
+
+      commit('BEGIN_FETCH')
 
       getTopGames(cant, cursor)
         .then(

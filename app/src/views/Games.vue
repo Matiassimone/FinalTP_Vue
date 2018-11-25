@@ -1,30 +1,31 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <p>{{ contador }} - {{ doble }}</p>
-    <button @click="plusOne">+1</button>
-    <button @click="minusOne">-1</button>
+    <div>
+      <ul id="example-1">
+        <li v-for="item in data" :key="item.id">
+          {{ item.name }}
+        </li>
+      </ul>
+
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'games',
   computed: {
-    contador() {
-      return this.$store.state.counter;
-    },
-    doble() {
-      return this.$store.getters.twice;
-    }
+    ...mapState('games', ['data', 'errors', 'loading'])
   },
   methods: {
-    plusOne() {
-      this.$store.commit('addOne');
-    },
-    minusOne() {
-      this.$store.commit('addNumber', {valor: 4, otra: 'cosa'});
-    }
+    
+
+  },
+  mounted() {
+    this.$store.dispatch('games/BEGIN_FETCH_GAMES');
   }
 }
 </script>
