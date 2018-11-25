@@ -60,13 +60,7 @@ const module_user = ({
   },
 
   getters: {
-    getToken: (state) => {
-      return state.accessToken
-    },
-
-    getUser: (state) => {
-      return state.user
-    }
+   //Getters
   }
 })
 
