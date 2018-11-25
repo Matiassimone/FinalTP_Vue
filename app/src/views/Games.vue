@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'home',
+  name: 'games',
   computed: {
     contador() {
       return this.$store.state.counter;
