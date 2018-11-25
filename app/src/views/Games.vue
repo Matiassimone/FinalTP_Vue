@@ -5,6 +5,7 @@
       <ul id="example-1">
         <li v-for="item in data" :key="item.id">
           {{ item.name }}
+          <img :src="addImageResolution(item.box_art_url)">
         </li>
       </ul>
 
@@ -21,6 +22,10 @@ export default {
     ...mapState('games', ['data', 'errors', 'loading'])
   },
   methods: {
+    addImageResolution(imgURL) {
+      let url = imgURL.replace('{width}x{height}','300x300');
+      return url;
+    }
     
 
   },
