@@ -14,47 +14,59 @@ const module_user = ({
         emailVerified: false,
         partnered: false
     },
-    accessToken: ""
+    accessToken: "",
+    loading: true,
+    errors: []
   },
-  
+
   mutations: {
+    SUCCESS_FETCH(state, res){
+      state.loading = false;
 
-    SUCCESS(res){
-      state.user = {...state.user, 
-        user: {
-          displayName: res.display_name,
-          id: res._id,
-          name: res.name,
-          type: res.type,
-          bio: res.bio,
-          logo: res.logo,
-          email: res.email,
-          emailVerified: res.email_verified,
-          partnered: res.partnered
-        }
+      state.user = {
+        displayName: res.display_name,
+        id: res._id,
+        name: res.name,
+        type: res.type,
+        bio: res.bio,
+        logo: res.logo,
+        email: res.email,
+        emailVerified: res.email_verified,
+        partnered: res.partnered
       }
-
-      state.accessToken = {...state.accessToken,
-        accessToken: res.accessToken}
+      state.accessToken = res.accessToken
     },
 
-    FAILURE(err){
+    FAILURE_FETCH(state, err){
+      state.loading = false;
+      state.errors = err;
       //Function handle error
+      console.log("Ups, something bad has happened:   " + err)
     }
   },
+
   actions: {
     BEGIN_FETCH_USER({commit}, userID) {
+      state.loading = true;
+
       getUserInformation(userID)
         .then(
-          (res) => commit('SUCCESS', res)
+          (res) => commit('SUCCESS_FETCH', res)
         )
         .catch(
-          (err) => commit('FAILURE', err)
+          (err) => commit('FAILURE_FETCH', err)
         )
     }
   },
-  getters: {
 
+  getters: {
+    getToken: (state) => {
+      return state.accessToken
+    },
+
+    getUser: (state) => {
+      return state.user
+    }
   }
 })
 

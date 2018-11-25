@@ -15,7 +15,7 @@ const module_games = ({
 
   },
   getters: {
-
+   //Getters
   }
 })
 
