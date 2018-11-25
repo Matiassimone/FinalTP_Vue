@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Games from './views/Games.vue'
 import Login from './views/Login.vue'
+import StreamsByGames from './views/StreamsByGames.vue'
 import store from './store'
 
 Vue.use(Router)
@@ -11,22 +12,32 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/home',
-      name: 'home',
-      component: Home
+      path: '/games',
+      name: 'games',
+      component: Games
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/streamsbygames',
+      name: 'streamsbygames',
+      component: StreamsByGames
     },
     {
       path: '/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/onestream',
+      name: 'onestream',
+      component: OneStream
+    },
+    {
+      path: '/topstreams',
+      name: 'topstreams',
+      component: TopStreams
+    },
+    {
+
     }
   ]
 })
