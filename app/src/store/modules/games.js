@@ -1,3 +1,4 @@
+import getTopGames from '../../services/api/apiCalls'
 
 const module_games = ({
     

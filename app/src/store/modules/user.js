@@ -1,3 +1,4 @@
+import getUserInformation from '../../services/api/apiCalls'
 
 const module_user = ({
     
@@ -15,19 +16,42 @@ const module_user = ({
     },
     accessToken: ""
   },
+  
   mutations: {
 
+    SUCCESS(res){
+      state.user = {...state.user, 
+        user: {
+          displayName: res.display_name,
+          id: res._id,
+          name: res.name,
+          type: res.type,
+          bio: res.bio,
+          logo: res.logo,
+          email: res.email,
+          emailVerified: res.email_verified,
+          partnered: res.partnered
+        }
+      }
+
+      state.accessToken = {...state.accessToken,
+        accessToken: res.accessToken}
+    },
+
+    FAILURE(err){
+      //Function handle error
+    }
   },
   actions: {
-    /*
-    primero pulear cosas que hizo facu
-
-    Llamo mutacion begin y loading true (empieza fetch)
-    Si es correcto llamo mutacion poner datos
-    si falla llamo mutacion manejar error
-
-    fijarce en lo de globant que esta igual
-    */
+    BEGIN_FETCH_USER({commit}, userID) {
+      getUserInformation(userID)
+        .then(
+          (res) => commit('SUCCESS', res)
+        )
+        .catch(
+          (err) => commit('FAILURE', err)
+        )
+    }
   },
   getters: {
 

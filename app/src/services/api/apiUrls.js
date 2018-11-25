@@ -1,4 +1,3 @@
-
 const SERVER_URL = 'https://api.twitch.tv/helix/'
 const DEFAULT_CANT = 20 ///default cant for items in the api
 
@@ -8,6 +7,7 @@ const DEFAULT_CANT = 20 ///default cant for items in the api
     } else {
         url += '?first=' + DEFAULT_CANT
     }
+    
     if (cursor) {
         url += '?after=' + cursor;
     }

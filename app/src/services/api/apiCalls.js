@@ -1,4 +1,9 @@
-import { GET_TOPGAMES_URL, GET_TOPSTREAMS_URL, GET_STREAMSBYGAMEID_URL, GET_STREAMBYUSERID_URL, GET_USERINFORMATION_URL} from './apiUrls'
+import { 
+    GET_TOPGAMES_URL, 
+    GET_TOPSTREAMS_URL, 
+    GET_STREAMSBYGAMEID_URL, 
+    GET_STREAMBYUSERID_URL, 
+    GET_USERINFORMATION_URL} from './apiUrls'
 
 // Handle HTTP errors since fetch won't.
 function handleErrors(response) {
@@ -7,11 +12,13 @@ function handleErrors(response) {
     }
     return response;
 }
+
 function apiCall(url){
     return fetch(url)
             .then(handleErrors)
             .then(res => res.json());
 }
+
 
 export const getTopGames = (cant, cursor) => {
     const url = GET_TOPGAMES_URL(cant, cursor)
@@ -19,7 +26,7 @@ export const getTopGames = (cant, cursor) => {
 }
 
 export const getTopStreams = (cant, cursor) => {
-    const url =GET_TOPSTREAMS_URL(cant, cursor)
+    const url = GET_TOPSTREAMS_URL(cant, cursor)
     return apiCall(url)
 }
 
@@ -32,6 +39,7 @@ export const getStreamByUserId = (userID) => {
     const url = GET_STREAMBYUSERID_URL(userID)
     return apiCall(url)
 }
+
 export const getUserInformation = (userID) => {
     const url = GET_USERINFORMATION_URL(userID)
     return apiCall(url)
