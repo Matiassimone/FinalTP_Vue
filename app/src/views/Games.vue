@@ -1,4 +1,6 @@
 <template>
+<v-content>
+  <v-layout align-center justify-center row fill-height>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <div>
@@ -11,6 +13,8 @@
 
     </div>
   </div>
+  </v-layout>
+  </v-content>
 </template>
 
 <script>
