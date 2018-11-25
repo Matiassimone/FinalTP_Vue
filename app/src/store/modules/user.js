@@ -44,12 +44,17 @@ const module_user = ({
       state.errors = err;
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)
+    },
+
+    BEGIN_FETCH(){
+      state.loading = true;
     }
   },
 
   actions: {
     BEGIN_FETCH_USER({commit}, userID) {
-      state.loading = true;
+
+      commit('BEGIN_FETCH')
 
       getUserInformation(userID)
         .then(
