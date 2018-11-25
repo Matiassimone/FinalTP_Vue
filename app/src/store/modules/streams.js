@@ -73,13 +73,13 @@ const module_streams = ({
       console.log("Ups, something bad has happened:   " + err)
     },
 
-    BEGIN_FETCH_TOPSTREAMS(){
+    BEGIN_FETCH_TOPSTREAMS(state){
       state.topStreams.loading = true;
     },
-    BEGIN_FETCH_STREAMSBYGAMEID(){
+    BEGIN_FETCH_STREAMSBYGAMEID(state){
       state.streamsByGameId.loading = true;
     },
-    BEGIN_FETCH_STREAMBYUSERID(){
+    BEGIN_FETCH_STREAMBYUSERID(state){
       state.streamByUserId.loading = true;
     }
   },
