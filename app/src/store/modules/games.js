@@ -26,7 +26,7 @@ const module_games = ({
       console.log("Ups, something bad has happened:   " + err)
     },
     
-    BEGIN_FETCH(state, err){
+    BEGIN_FETCH(){
       state.loading = true;
     }
   },

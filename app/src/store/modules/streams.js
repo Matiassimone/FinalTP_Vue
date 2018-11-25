@@ -71,12 +71,23 @@ const module_streams = ({
       state.streamByUserId.errors = err;
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)
+    },
+
+    BEGIN_FETCH_TOPSTREAMS(){
+      state.topStreams.loading = true;
+    },
+    BEGIN_FETCH_STREAMSBYGAMEID(){
+      state.streamsByGameId.loading = true;
+    },
+    BEGIN_FETCH_STREAMBYUSERID(){
+      state.streamByUserId.loading = true;
     }
   },
 
   actions: {
     BEGIN_FETCH_TOPSTREAMS({commit}, cant, cursor) {
-      state.topStreams.loading = true;
+
+      commit('BEGIN_FETCH_TOPSTREAMS')
 
       getTopStreams(cant, cursor)
         .then(
@@ -88,6 +99,9 @@ const module_streams = ({
     },
 
     BEGIN_FETCH_STREAMSBYGAMEID({commit}, gameID, cant, cursor) {
+
+      commit('BEGIN_FETCH_STREAMSBYGAMEID')
+
       state.streamsByGameId.loading = true;
 
       getStreamByGameId(gameID, cant, cursor)
@@ -100,6 +114,9 @@ const module_streams = ({
     },
 
     BEGIN_FETCH_STREAMBYUSERID({commit}, userID) {
+
+      commit('BEGIN_FETCH_STREAMBYUSERID')
+
       state.streamByUserId.loading = true;
 
       getStreamByUserId(userID)
