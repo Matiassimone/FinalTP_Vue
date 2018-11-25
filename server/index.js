@@ -101,6 +101,7 @@ var template = handlebars.compile(`
 app.get('/', function (req, res) {
   if(req.session && req.session.passport && req.session.passport.user) {
     res.send(template(req.session.passport.user));
+    console.log(req.session.passport.user);
   } else {
     res.send('<html><head><title>Twitch Auth Sample</title></head><a href="/auth/twitch"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"></a></html>');
   }
