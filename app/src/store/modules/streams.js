@@ -102,8 +102,6 @@ const module_streams = ({
 
       commit('BEGIN_FETCH_STREAMSBYGAMEID')
 
-      state.streamsByGameId.loading = true;
-
       getStreamByGameId(gameID, cant, cursor)
         .then(
           (res) => commit('SUCCESS_FETCH_STREAMSBYGAMEID', res)
@@ -116,8 +114,6 @@ const module_streams = ({
     BEGIN_FETCH_STREAMBYUSERID({commit}, userID) {
 
       commit('BEGIN_FETCH_STREAMBYUSERID')
-
-      state.streamByUserId.loading = true;
 
       getStreamByUserId(userID)
         .then(

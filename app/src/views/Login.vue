@@ -1,5 +1,4 @@
 <template>
-    
     <v-layout>
     <v-flex align-self-center justify-center>   
         <input v-model="user" type="text" placeholder="Usuario">
@@ -8,6 +7,7 @@
    </v-flex>
     </v-layout>
 </template>
+
 <script>
 import authService from "../services/AuthService.js";
 
@@ -27,4 +27,12 @@ export default {
   }
 };
 </script>
+
+<style>
+    .flexTweet {
+        flex: 1;
+        align-content: center
+    }
+</style>
+
 
