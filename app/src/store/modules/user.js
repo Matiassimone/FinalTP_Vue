@@ -46,7 +46,7 @@ const module_user = ({
       console.log("Ups, something bad has happened:   " + err)
     },
 
-    BEGIN_FETCH(){
+    BEGIN_FETCH(state){
       state.loading = true;
     }
   },
