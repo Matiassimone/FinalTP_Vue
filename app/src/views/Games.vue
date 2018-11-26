@@ -24,6 +24,7 @@
 import { mapState } from 'vuex'
 import OneGame from '../components/OneGame.vue'
 export default {
+
   name: 'games',
   components:{
     OneGame
@@ -31,12 +32,14 @@ export default {
   computed: {
     ...mapState('games', ['data', 'errors', 'loading'])
   },
+
   methods: {
     redirect(id){ 
       this.$router.push({ name: "streamsbygames", params: { gameId: id} });
     } 
 
   },
+  
   mounted() {
     this.$store.dispatch('games/BEGIN_FETCH_GAMES',50);
   }

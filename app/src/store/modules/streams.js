@@ -94,7 +94,7 @@ const module_streams = ({
           (res) => commit('SUCCESS_FETCH_TOPSTREAMS', res)
         )
         .catch(
-          (err) => commit('FAILURE_FETCH', err)
+          (err) => commit('FAILURE_FETCH_TOPSTREAMS', err)
         )
     },
 
@@ -107,7 +107,7 @@ const module_streams = ({
           (res) => commit('SUCCESS_FETCH_STREAMSBYGAMEID', res)
         )
         .catch(
-          (err) => commit('FAILURE_FETCH', err)
+          (err) => commit('FAILURE_FETCH_STREAMSBYGAMEID', err)
         )
     },
 
@@ -120,7 +120,7 @@ const module_streams = ({
           (res) => commit('SUCCESS_FETCH_STREAMBYUSERID', res)
         )
         .catch(
-          (err) => commit('FAILURE_FETCH', err)
+          (err) => commit('FAILURE_FETCH_STREAMBYUSERID', err)
         )
     }
   },
