@@ -22,7 +22,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import OneGame from '../components/OneGame.vue'
+import OneGame from '../components/OneGameCard.vue'
 export default {
 
   name: 'games',
