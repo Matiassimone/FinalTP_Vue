@@ -21,18 +21,20 @@
 import { mapState } from 'vuex'
 
 export default {
+
   name: 'games',
+
   computed: {
     ...mapState('games', ['data', 'errors', 'loading'])
   },
+
   methods: {
     addImageResolution(imgURL) {
       let url = imgURL.replace('{width}x{height}','300x300');
       return url;
     }
-    
-
   },
+  
   mounted() {
     this.$store.dispatch('games/BEGIN_FETCH_GAMES');
   }
