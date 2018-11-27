@@ -1,42 +1,52 @@
 <template>
-<v-content>
-  <v-layout align-center justify-center row fill-height>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <div>
-      <ul id="example-1">
-        <li v-for="item in data" :key="item.id">
-          {{ item.name }}
-          <img :src="addImageResolution(item.box_art_url)">
-        </li>
-      </ul>
-
-    </div>
-  </div>
+<v-content fluid>
+  <v-layout>
+    <v-flex md12 class="default">
+      <v-container grid-list-xl fluid>
+        <v-layout row wrap>
+          <v-flex
+              v-for="game in data"
+              :key="game.id"
+              md2
+          >
+          <div @click="redirect(game.id)" class="pointer">
+            <OneGame :game=game />
+          </div>
+          </v-flex>
+        </v-layout>
+      </v-container>  
+    </v-flex>  
   </v-layout>
   </v-content>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
+import OneGame from '../components/OneGameCard.vue'
 export default {
 
   name: 'games',
-
+  components:{
+    OneGame
+  },
   computed: {
     ...mapState('games', ['data', 'errors', 'loading'])
   },
 
   methods: {
-    addImageResolution(imgURL) {
-      let url = imgURL.replace('{width}x{height}','300x300');
-      return url;
-    }
+    redirect(id){ 
+      this.$router.push({ name: "streamsbygames", params: { gameId: id} });
+    } 
+
   },
   
   mounted() {
-    this.$store.dispatch('games/BEGIN_FETCH_GAMES');
+    this.$store.dispatch('games/BEGIN_FETCH_GAMES',50);
   }
 }
 </script>
+<style>
+.pointer { cursor: pointer; }
+.default {cursor: default;}
+
+</style>
