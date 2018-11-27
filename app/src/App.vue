@@ -30,9 +30,12 @@
 
             <!--Search Field-->
             <v-text-field
+                v-model="searchWord"
                 hide-details
                 prepend-icon="search"
                 single-line
+                placeholder="Search a user"
+                @keyup.enter="submit"
              ></v-text-field>
 
             <!--Divider-->
@@ -44,6 +47,8 @@
 
             <!--User Field-->
             <div class="text-xs-center">
+
+                <div v-if="accessToken">
                 
                 <v-menu
                     v-model="menu"
@@ -56,7 +61,7 @@
                        >     
                         <!--User Pic-->
                         <v-list-tile-avatar>
-                            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                            <img :src="user.logo">
                         </v-list-tile-avatar>
                         <v-icon>details</v-icon>
                     </v-btn>
@@ -67,9 +72,9 @@
 
                                 <v-list-tile-content>
                                     <!--User Name-->
-                                    <v-list-tile-title>John Leider</v-list-tile-title>
+                                    <v-list-tile-title>{{user.displayName}}</v-list-tile-title>
                                     <!--User Email-->
-                                    <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
+                                    <v-list-tile-sub-title>{{user.email}}s</v-list-tile-sub-title>
                                 </v-list-tile-content>
 
                                 <v-list-tile-action>
@@ -93,7 +98,14 @@
 
                                     <v-list-tile-title>Bio:</v-list-tile-title>
                                     <!--Bio-->
-                                    <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
+                                    <v-list-tile-sub-title>
+                                        <div v-if="user.bio">
+                                            <div>{{user.bio}}</div>
+                                        </div>
+                                        <div v-else>
+                                            <div>Sorry! This user dont have description</div>
+                                        </div>
+                                    </v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list>
@@ -113,17 +125,25 @@
                         <!--Button Logout-->
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" flat @click="menu = false">Logout</v-btn>
+                            <v-btn color="primary" flat @click="logout()">Logout</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-menu>
+                </div>
+                <div v-else>
+                    <a :href="authServer+'auth/twitch'"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"></a>
+                </div>
             </div>
+
         </v-toolbar>
         <router-view/>
     </v-app>
 </template>
 
 <script>
+import  {AUTH_SERVER_URL}  from './services/api/apiUrls.js'
+import { mapState } from 'vuex'
+
 export default {
   name: "App",
   components: {
@@ -131,9 +151,27 @@ export default {
   },
   data() {
     return {
-      //
+      searchWord:"",
+      authServer: AUTH_SERVER_URL
     };
+  },
+  methods: {
+      submit(event) {
+          this.$router.push({ name: "searchResults", params: { searchWord: event.target.value} });          
+      },
+      logout(){
+        window.location = AUTH_SERVER_URL + 'logout ' 
+      }
+  },
+  computed: {
+    ...mapState('user', ['user', 'errors', 'loading', 'accessToken'])
+    
+    
+  },
+  mounted() {
+    this.$store.dispatch('user/BEGIN_FETCH_USER');
   }
+
 };
 </script>
 

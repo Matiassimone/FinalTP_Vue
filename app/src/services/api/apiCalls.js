@@ -4,7 +4,8 @@ import {
     GET_STREAMSBYGAMEID_URL, 
     GET_STREAMBYUSERID_URL, 
     GET_USERINFORMATION_URL,
-    CLIENT_ID
+    CLIENT_ID,
+    GET_LOGGEDUSER_URL
 } from './apiUrls'
 
 // Handle HTTP errors since fetch won't.
@@ -55,4 +56,11 @@ export const getStreamByUserId = (userID) => {
 export const getUserInformation = (userID) => {
     const url = GET_USERINFORMATION_URL(userID)
     return apiCall(url)
+}
+
+export const getLoggedUser = () => {
+    const url = GET_LOGGEDUSER_URL()
+    return fetch(url)
+            .then(handleErrors)
+            .then(res => res.json())
 }

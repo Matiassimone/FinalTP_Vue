@@ -1,6 +1,7 @@
 const SERVER_URL = 'https://api.twitch.tv/helix/'
 const DEFAULT_CANT = 20 ///default cant for items in the api
 export const CLIENT_ID = 'w44e8dg8ut8fvzbho0gprtdulhnvvs'
+export const AUTH_SERVER_URL = 'http://localhost:3000/'
 
  const validateParams = (url,cant,cursor) => {
     if (cant) {
@@ -39,3 +40,5 @@ export const GET_STREAMSBYGAMEID_URL = (gameID, cant, cursor) => {
 export const GET_STREAMBYUSERID_URL = (userID) => SERVER_URL + 'streams?user_id=' + userID;
 
 export const GET_USERINFORMATION_URL = (userID) => SERVER_URL + 'users?id=' + userID;
+
+export const GET_LOGGEDUSER_URL = () => AUTH_SERVER_URL + 'getloggeduser'
