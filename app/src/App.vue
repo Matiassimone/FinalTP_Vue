@@ -22,13 +22,11 @@
                 </figure>
             </router-link>
 
-
             <!--Links Field-->
             <v-toolbar-items>
                 <v-btn flat><router-link to="/games" class="btn-nav">Games</router-link></v-btn> 
                 <v-btn flat ><router-link to="/topstreams" class="btn-nav">Top</router-link></v-btn> 
             </v-toolbar-items>
-            <v-spacer></v-spacer>
 
             <!--Search Field-->
             <v-text-field
@@ -36,14 +34,13 @@
                 prepend-icon="search"
                 single-line
              ></v-text-field>
-            <v-spacer></v-spacer>
 
+<v-divider
+      class="mx-3"
+      inset
+      vertical
+    ></v-divider>
             <!--User Field-->
-            
-            <v-list-tile-avatar>
-                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-            </v-list-tile-avatar>
-    
             <div class="text-xs-center">
                 
                 <v-menu
@@ -52,10 +49,14 @@
                     :nudge-width="200"
                     offset-x>
 
-                    <v-btn
+                   <v-btn flat large
                         slot="activator"
-                        color="primary"
-                        dark> User 
+                       >     
+
+                        <v-list-tile-avatar>
+                            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                        </v-list-tile-avatar>
+                        <v-icon>details</v-icon>
                     </v-btn>
                     
                     <v-card>
