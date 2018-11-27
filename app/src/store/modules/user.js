@@ -1,4 +1,4 @@
-import { getUserInformation } from '../../services/api/apiCalls'
+import { getLoggedUser } from '../../services/api/apiCalls'
 
 const module_user = ({
     
@@ -42,8 +42,6 @@ const module_user = ({
     FAILURE_FETCH(state, err){
       state.loading = false;
       state.errors = err;
-      //Function handle error
-      console.log("Ups, something bad has happened:   " + err)
     },
 
     BEGIN_FETCH(state){
@@ -52,11 +50,11 @@ const module_user = ({
   },
 
   actions: {
-    BEGIN_FETCH_USER({commit}, userID) {
+    BEGIN_FETCH_USER({commit}) {
 
       commit('BEGIN_FETCH')
 
-      getUserInformation(userID)
+      getLoggedUser()
         .then(
           (res) => commit('SUCCESS_FETCH', res)
         )

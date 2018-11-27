@@ -16,6 +16,7 @@ var passport       = require('passport');
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var request        = require('request');
 var handlebars     = require('handlebars');
+var cors = require('cors');
 
 // Define our constants, you will change these with your own
 const TWITCH_CLIENT_ID = 'm9zae5i49wddds93axe6gobhr81iij';
@@ -29,9 +30,23 @@ app.use(session({secret: SESSION_SECRET, resave: false, saveUninitialized: false
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors({
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}));
 
 /// UserLogged
 let user = {}
+
+
+////methods
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
 
 // Override passport profile function to get user profile from Twitch API
 OAuth2Strategy.prototype.userProfile = function(accessToken, done) {
@@ -100,11 +115,17 @@ app.get('auth/islogged:token', function(req, res) {
 })
 
 app.get('/getloggeduser', function(req, res) {
-  if(user) {
+  if(!isEmpty(user)) {
     return res.send(JSON.stringify(user));
   }else
-    return res.status(401).send('Sorry, you not have logged');
+    return res.status(401).send(JSON.stringify({error:'Sorry, you not have logged'}));
 })
+
+app.get('/logout', function(req, res) {
+  user = {}
+  return res.status(200).send('OK');
+})
+
 
 
 

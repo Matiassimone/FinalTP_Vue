@@ -45,6 +45,8 @@
     ></v-divider>
             <!--User Field-->
             <div class="text-xs-center">
+
+                <div v-if="accessToken">
                 
                 <v-menu
                     v-model="menu"
@@ -109,6 +111,10 @@
                         </v-card-actions>
                     </v-card>
                 </v-menu>
+                </div>
+                <div v-else>
+                    <a :href="authServer+'auth/twitch'"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"></a>
+                </div>
             </div>
 
         </v-toolbar>
@@ -117,6 +123,9 @@
 </template>
 
 <script>
+import  AUTH_SERVER_URL  from './services/api/apiUrls.js'
+import { mapState } from 'vuex'
+
 export default {
   name: "App",
   components: {
@@ -124,14 +133,24 @@ export default {
   },
   data() {
     return {
-      searchWord:""
+      searchWord:"",
+      authServer: AUTH_SERVER_URL
     };
   },
   methods: {
       submit(event) {
           this.$router.push({ name: "searchResults", params: { searchWord: event.target.value} });          
       }
+  },
+  computed: {
+    ...mapState('user', ['user', 'errors', 'loading', 'accessToken'])
+    
+    
+  },
+  mounted() {
+    this.$store.dispatch('user/BEGIN_FETCH_USER');
   }
+
 };
 </script>
 
