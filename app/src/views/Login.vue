@@ -1,16 +1,24 @@
 <template>
-  <v-app>
-      <v-layout>
-        <v-flex align-self-center justify-center>   
-            <input v-model="user" type="text" placeholder="Usuario">
-            <input v-model="password" type="password" placeholder="Password">
-            <button @click="login">Ingresar</button>
-        </v-flex>
-        <v-flex>
-          <iframe src="https://player.twitch.tv/?channel=markilokurasy" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-          <iframe :src="add()"  frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-        </v-flex>
+  <v-app class="limit-screen">
+
+    
+    <div class="background-video"></div>
+    
+      <v-layout align-center justify-center column fill-height >
+        <v-layout align-center justify-center row>
+
+          
+            <div class="big-quote">
+              <h1>asdnsiugbiudrbgirbiu</h1>
+            </div>
+          
+
+        </v-layout>
       </v-layout>
+
+    <v-layout v-resize="onResize">
+     <iframe :src="addImageResolution()" allowfullscreen="true" scrolling="no" :height= "windowSize.y"   :width= "windowSize.x"  ></iframe>
+    </v-layout>
   </v-app>
 </template>
 
@@ -24,13 +32,18 @@ export default {
 
   mounted() {
     this.$store.dispatch('streams/BEGIN_FETCH_TOPSTREAMS',1);
-    console.log(this.topStreams.data);
+    this.onResize();
   },
   
   data() {
     return {
       user: "",
-      password: ""
+      password: "",
+
+      windowSize: {
+        x: 0,
+        y: 0
+      }
     };
   },
 
@@ -40,24 +53,69 @@ export default {
 
   methods: {
     login() {
-      console.log(this.$router);
       this.$router.push({ name: "games" });
     },
 
     addImageResolution() {
-      let url = ('https://www.twitch.tv/embed/'+ this.topStreams.data.user_name + '/chat');
+      let url = ('https://player.twitch.tv/?channel='+ this.topStreams.data[0].user_name);
+      console.log(url);
+      
       return url;
     },
 
-    add() {
-      let url = ('https://player.twitch.tv/?channel='+ this.topStreams.data.user_name);
-      return url;
+    onResize () {
+        this.windowSize = { x: window.innerWidth*1, y: window.innerHeight*12 }
+        console.log(this.windowSize);
+        
     }
   }
 };
+
+
+
+/*        <v-flex align-self-center justify-center>   
+            <input v-model="user" type="text" placeholder="Usuario">
+            <input v-model="password" type="password" placeholder="Password">
+            <button @click="login">Ingresar</button>
+        </v-flex> */
 </script>
 
 <style>
+
+  html {
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  .limit-screen{
+    height: 100vh;
+  }
+
+  .background-video {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+
+    background: rgba(0, 0, 0, 0.8);
+    display: block;
+  }
+
+  .big-quote{
+    background-color: #6441A4;
+    z-index: 2;
+    position: absolute;
+  }
+
+
+
+
 
 </style>
 
