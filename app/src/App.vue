@@ -61,7 +61,7 @@
                        >     
                         <!--User Pic-->
                         <v-list-tile-avatar>
-                            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+                            <img :src="user.logo">
                         </v-list-tile-avatar>
                         <v-icon>details</v-icon>
                     </v-btn>
@@ -72,9 +72,9 @@
 
                                 <v-list-tile-content>
                                     <!--User Name-->
-                                    <v-list-tile-title>John Leider</v-list-tile-title>
+                                    <v-list-tile-title>{{user.displayName}}</v-list-tile-title>
                                     <!--User Email-->
-                                    <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
+                                    <v-list-tile-sub-title>{{user.email}}s</v-list-tile-sub-title>
                                 </v-list-tile-content>
 
                                 <v-list-tile-action>
@@ -98,7 +98,14 @@
 
                                     <v-list-tile-title>Bio:</v-list-tile-title>
                                     <!--Bio-->
-                                    <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
+                                    <v-list-tile-sub-title>
+                                        <div v-if="user.bio">
+                                            <div>{{user.bio}}</div>
+                                        </div>
+                                        <div v-else>
+                                            <div>Sorry! This user dont have description</div>
+                                        </div>
+                                    </v-list-tile-sub-title>
                                 </v-list-tile-content>
                             </v-list-tile>
                         </v-list>
@@ -118,7 +125,7 @@
                         <!--Button Logout-->
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="primary" flat @click="menu = false">Logout</v-btn>
+                            <v-btn color="primary" flat @click="logout()">Logout</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-menu>
@@ -134,7 +141,7 @@
 </template>
 
 <script>
-import  AUTH_SERVER_URL  from './services/api/apiUrls.js'
+import  {AUTH_SERVER_URL}  from './services/api/apiUrls.js'
 import { mapState } from 'vuex'
 
 export default {
@@ -151,6 +158,9 @@ export default {
   methods: {
       submit(event) {
           this.$router.push({ name: "searchResults", params: { searchWord: event.target.value} });          
+      },
+      logout(){
+        window.location = AUTH_SERVER_URL + 'logout ' 
       }
   },
   computed: {

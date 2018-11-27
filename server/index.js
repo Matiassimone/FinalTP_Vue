@@ -123,7 +123,7 @@ app.get('/getloggeduser', function(req, res) {
 
 app.get('/logout', function(req, res) {
   user = {}
-  return res.status(200).send('OK');
+  return res.redirect('http://localhost:8080/');
 })
 
 
@@ -135,7 +135,7 @@ app.get('/logout', function(req, res) {
 app.get('/', function (req, res) {
   if(req.session && req.session.passport && req.session.passport.user) {
     user = req.session.passport.user;
-    res.redirect('http://localhost:8080/home');
+    res.redirect('http://localhost:8080/');
     console.log(req.session.passport.user);
   } else {
     res.send('<html><head><title>Twitch Auth Sample</title></head><a href="/auth/twitch"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"></a></html>');
