@@ -35,11 +35,13 @@
                 single-line
              ></v-text-field>
 
-<v-divider
-      class="mx-3"
-      inset
-      vertical
-    ></v-divider>
+            <!--Divider-->
+            <v-divider
+                class="mx-3"
+                inset
+                vertical
+            ></v-divider>
+
             <!--User Field-->
             <div class="text-xs-center">
                 
@@ -52,7 +54,7 @@
                    <v-btn flat large
                         slot="activator"
                        >     
-
+                        <!--User Pic-->
                         <v-list-tile-avatar>
                             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
                         </v-list-tile-avatar>
@@ -63,9 +65,10 @@
                         <v-list>
                             <v-list-tile avatar>
 
-
                                 <v-list-tile-content>
+                                    <!--User Name-->
                                     <v-list-tile-title>John Leider</v-list-tile-title>
+                                    <!--User Email-->
                                     <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
                                 </v-list-tile-content>
 
@@ -75,6 +78,7 @@
                                         icon
                                         @click="fav = !fav"
                                     >
+                                        <!--User Icon Card-->
                                         <v-icon>favorite</v-icon>
                                     </v-btn>
                                 </v-list-tile-action>
@@ -82,32 +86,38 @@
                         </v-list>
 
                         <v-divider></v-divider>
-
+                        <!--User Bio-->
                         <v-list>
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <v-switch v-model="message" color="purple"></v-switch>
-                                </v-list-tile-action>
-                                <v-list-tile-title>Enable messages</v-list-tile-title>
-                            </v-list-tile>
+                            <v-list-tile avatar>
+                                <v-list-tile-content>
 
-                            <v-list-tile>
-                                <v-list-tile-action>
-                                    <v-switch v-model="hints" color="purple"></v-switch>
-                                </v-list-tile-action>
-                                <v-list-tile-title>Enable hints</v-list-tile-title>
+                                    <v-list-tile-title>Bio:</v-list-tile-title>
+                                    <!--Bio-->
+                                    <v-list-tile-sub-title>Founder of Vuetify.js</v-list-tile-sub-title>
+                                </v-list-tile-content>
                             </v-list-tile>
                         </v-list>
 
+                        <v-divider></v-divider>
+
+                        <v-list>
+                            <!--Switch Nocturne mode-->
+                            <v-list-tile>
+                                <v-list-tile-action>
+                                    <v-switch v-model="message" color="primary"></v-switch>
+                                </v-list-tile-action>
+                                <v-list-tile-title>Enable nocturne mode</v-list-tile-title>
+                            </v-list-tile>
+                        </v-list>
+
+                        <!--Button Logout-->
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn flat @click="menu = false">Cancel</v-btn>
-                            <v-btn color="primary" flat @click="menu = false">Save</v-btn>
+                            <v-btn color="primary" flat @click="menu = false">Logout</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-menu>
-            </div></v-btn>
-
+            </div>
         </v-toolbar>
         <router-view/>
     </v-app>
