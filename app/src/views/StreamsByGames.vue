@@ -5,11 +5,13 @@
       <v-container grid-list-xl fluid>
         <v-layout row wrap>
           <v-flex
-              v-for="stream in data"
+              v-for="stream in streamsByGameId.data"
               :key="stream.id"
-              md2
+              md3
           >
+          <div @click="redirect(stream)" class="pointer">
             <OneStreamCard :stream=stream />
+          </div>
           </v-flex>
         </v-layout>
       </v-container>  
@@ -25,19 +27,20 @@ export default {
     components:{
         OneStreamCard
     },
-    props: ["gameID"],
     computed: {
-        ...mapState('streams', ['data', 'errors', 'loading'])
+        ...mapState('streams', ['streamsByGameId'])
     },
     methods: {
-
+         redirect(stream){ 
+            this.$router.push({ name: "onestream", params: { stream: stream} });
+        } 
     },
     mounted() {
-    this.$store.dispatch('streams/BEGIN_FETCH_STREAMSBYGAMEID',50);
+    this.$store.dispatch('streams/BEGIN_FETCH_STREAMSBYGAMEID',this.$route.params.gameId);
   }
 }
 </script>
 <style>
-
+    .pointer { cursor: pointer; }
 </style>
 
