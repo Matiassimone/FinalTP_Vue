@@ -5,7 +5,7 @@
         <v-container grid-list-xl fluid>
           <v-layout row wrap>
             <v-flex
-                v-for="stream in streamsByGameId.data"
+                v-for="stream in topStreams.data"
                 :key="stream.id"
                 md3
             >
@@ -42,7 +42,7 @@ export default {
     },
 
     mounted() {
-    this.$store.dispatch('streams/BEGIN_FETCH_STREAMSBYGAMEID',this.$route.params.gameId);
+    this.$store.dispatch('streams/BEGIN_FETCH_TOPSTREAMS',10);
   }
 }
 </script>
