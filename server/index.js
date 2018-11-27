@@ -16,7 +16,7 @@ var passport       = require('passport');
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var request        = require('request');
 var handlebars     = require('handlebars');
-var cors = require('cors');
+var cors           = require('cors');
 
 // Define our constants, you will change these with your own
 const TWITCH_CLIENT_ID = 'm9zae5i49wddds93axe6gobhr81iij';
@@ -136,12 +136,11 @@ app.get('/', function (req, res) {
   if(req.session && req.session.passport && req.session.passport.user) {
     user = req.session.passport.user;
     res.redirect('http://localhost:8080/');
-    console.log(req.session.passport.user);
   } else {
     res.send('<html><head><title>Twitch Auth Sample</title></head><a href="/auth/twitch"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"></a></html>');
   }
 });
 
 app.listen(3000, function () {
-  console.log('Super TwitchClone listening on port 3000!')
+  console.log("\x1b[42m",'\n\n\n--------------------------------------------\n>>> Super Zwitch listening on port 3000! <<<\n--------------------------------------------\n\n\n')
 });
