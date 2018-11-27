@@ -128,7 +128,7 @@ export default {
     padding-left: 0;
 
     margin-top: 70vh;
-    color: #6441d5;
+    color: #6441c8;
     z-index: 2;
     position: auto;
   }

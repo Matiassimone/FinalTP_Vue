@@ -20,9 +20,11 @@
                 </router-link>
             </v-flex>
 
-            <v-flex size=1>
-                <v-btn flat><router-link to="/about">About</router-link></v-btn> 
-            </v-flex>
+            <v-btn flat><router-link to="/games" class="btn-nav">Games</router-link></v-btn> 
+
+            
+            <v-btn flat ><router-link to="/topstreams" class="btn-nav">Top</router-link></v-btn> 
+            
 
         </v-toolbar>
         <router-view/>
@@ -88,6 +90,10 @@ figure:hover {
 .logo-FillColor {
     fill: currentColor;
     color: #6441A4;
+}
+
+.btn-nav {
+    text-decoration: none;
 }
 
 </style>
