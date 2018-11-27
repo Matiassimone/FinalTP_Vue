@@ -30,6 +30,9 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+/// UserLogged
+let user = {}
+
 // Override passport profile function to get user profile from Twitch API
 OAuth2Strategy.prototype.userProfile = function(accessToken, done) {
   var options = {
@@ -97,8 +100,8 @@ app.get('auth/islogged:token', function(req, res) {
 })
 
 app.get('/getloggeduser', function(req, res) {
-  if(req.session && req.session.passport && req.session.passport.user) {
-    return res.send(JSON.stringify(req.session.passport.user));
+  if(user) {
+    return res.send(JSON.stringify(user));
   }else
     return res.status(401).send('Sorry, you not have logged');
 })
@@ -110,6 +113,7 @@ app.get('/getloggeduser', function(req, res) {
 // If user has an authenticated session, display it, otherwise display link to authenticate
 app.get('/', function (req, res) {
   if(req.session && req.session.passport && req.session.passport.user) {
+    user = req.session.passport.user;
     res.redirect('http://localhost:8080/home');
     console.log(req.session.passport.user);
   } else {

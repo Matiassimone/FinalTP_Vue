@@ -32,9 +32,12 @@
 
             <!--Search Field-->
             <v-text-field
+                v-model="searchWord"
                 hide-details
                 prepend-icon="search"
                 single-line
+                placeholder="Search a user"
+                @keyup.enter="submit"
              ></v-text-field>
             <v-spacer></v-spacer>
 
@@ -105,7 +108,7 @@
                         </v-card-actions>
                     </v-card>
                 </v-menu>
-            </div></v-btn>
+            </div>
 
         </v-toolbar>
         <router-view/>
@@ -120,8 +123,13 @@ export default {
   },
   data() {
     return {
-      //
+      searchWord:""
     };
+  },
+  methods: {
+      submit(event) {
+          this.$router.push({ name: "searchResults", params: { searchWord: event.target.value} });          
+      }
   }
 };
 </script>
