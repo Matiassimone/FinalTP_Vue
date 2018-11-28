@@ -39,10 +39,6 @@ export default {
   
   data() {
     return {
-      user: "",
-      password: "",
-      videoUrl: "",
-
       windowSize: {
         x: 0,
         y: 0
@@ -52,15 +48,9 @@ export default {
 
   computed: {
     ...mapState('streams', ['topStreams']),
-
-
   },
 
   methods: {
-    login() {
-      this.$router.push({ name: "games" });
-    },
-
     createURL() {
       if(!this.topStreams.loading) {
         let videoUrl = ('https://player.twitch.tv/?channel='+ this.topStreams.data[0].user_name);
@@ -71,7 +61,6 @@ export default {
     onResize: function () {
         this.windowSize = { x: window.innerWidth*1, y: window.innerHeight*12 }
     }
-
   }
 };
 </script>
