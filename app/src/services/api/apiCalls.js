@@ -5,7 +5,9 @@ import {
     GET_STREAMBYUSERID_URL, 
     GET_USERINFORMATION_URL,
     CLIENT_ID,
-    GET_LOGGEDUSER_URL
+    GET_LOGGEDUSER_URL,
+    GET_USERINFORMATIONBYNAME_URL,
+    GET_GAME_BY_NAME
 } from './apiUrls'
 
 // Handle HTTP errors since fetch won't.
@@ -38,6 +40,11 @@ export const getTopGames = (cant, cursor) => {
     return apiCall(url)
 }
 
+export const getGameByName = (gameName) => {
+    const url = GET_GAME_BY_NAME(gameName)
+    return apiCall(url)
+}
+
 export const getTopStreams = (cant, cursor) => {
     const url = GET_TOPSTREAMS_URL(cant, cursor)
     return apiCall(url)
@@ -55,6 +62,11 @@ export const getStreamByUserId = (userID) => {
 
 export const getUserInformation = (userID) => {
     const url = GET_USERINFORMATION_URL(userID)
+    return apiCall(url)
+}
+
+export const getUserInformationByName = (userName) => {
+    const url = GET_USERINFORMATIONBYNAME_URL(userName)
     return apiCall(url)
 }
 

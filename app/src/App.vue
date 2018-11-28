@@ -157,7 +157,7 @@ export default {
   },
   methods: {
       submit(event) {
-          this.$router.push({ name: "searchResults", params: { searchWord: event.target.value} });          
+          this.$router.push({ name: "searchresults", params: { searchWord: event.target.value} });          
       },
       logout(){
         window.location = AUTH_SERVER_URL + 'logout ' 
