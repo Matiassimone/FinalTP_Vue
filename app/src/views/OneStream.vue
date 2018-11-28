@@ -2,12 +2,16 @@
   <v-app class="limit-screen">
 
       <v-layout align-center justify-center column fill-height v-resize="onResize">
-          <div class="playing-game">
+
+        <div class="playing-game" @click="redirect()">
             <v-avatar class="auto-fav"
-                size= 12vh
-            >
-                <img :src="addImageResolution(this.data[0].box_art_url)" alt="Game name">
-                <p class="title-game">{{this.data[0].name}}</p>
+                size= 12vh>
+
+                <img :src="addImageResolution(this.data[0].box_art_url)" alt="Game name" class="display-img">
+                
+                <v-icon class="title-game"
+                color="primary"
+                >{{this.data[0].name}}</v-icon>
             </v-avatar>
         </div>
         
@@ -67,7 +71,12 @@ export default {
         addImageResolution(imgURL) {
             let url = imgURL.replace('{width}x{height}','285x380');
             return url;
-        }
+        },
+
+        redirect(){ 
+            let id = this.data[0].id
+            this.$router.push({ name: "streamsbygames", params: { gameId: id} });
+        }, 
     }
 }
 </script>
@@ -76,17 +85,23 @@ export default {
     .playing-game{
         margin-top: 40vh;
         position: fixed;
+        cursor: pointer;
     }
 
     .title-game {
         font-family: 'dimitri';
         font-size: 5vh;
         margin-bottom: 0;
-        position: fixed;
+        position: auto;
     }
 
     .auto-fav{
-        padding-left: 5vh;
+        padding-right: 50vw;
+    }
+
+    .display-img{
+        display: -webkit-box;
+        margin-right: 30px
     }
 </style>
 
