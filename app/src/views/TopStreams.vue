@@ -7,14 +7,14 @@
           
           <v-layout row wrap>
             <v-flex
-                v-for="stream in topStreams.data"
-                :key="stream.id"
-                md3
-            >
-            <p class="dimitri-title">{{topStreams.data.indexOf(stream) +1}} #</p>
-            <div @click="redirect(stream)" class="pointer">
-              <OneStreamCard :stream=stream />
-            </div>
+              v-for="stream in topStreams.data"
+              :key="stream.id"
+              md3
+              >
+              <p class="dimitri-title">{{topStreams.data.indexOf(stream) +1}} #</p>
+              <div @click="redirect(stream)" class="pointer">
+                <OneStreamCard :stream=stream />
+              </div>
             </v-flex>
           </v-layout>
         </v-container>  
@@ -29,36 +29,34 @@ import OneStreamCard from '../components/OneStreamCard.vue'
 import LoaderBar from '../components/LoaderBar.vue'
 
 export default {
-    name: 'topstreams',
 
-    components:{
-      LoaderBar
-    },
+  name: 'topstreams',
 
-    components:{
-        OneStreamCard
-    },
+  components:{
+    OneStreamCard,
+    LoaderBar
+  },
 
-    computed: {
-        ...mapState('streams', ['topStreams'])
-    },
+  computed: {
+    ...mapState('streams', ['topStreams'])
+  },
 
-    methods: {
-         redirect(stream){ 
-            this.$router.push({ name: "onestream", params: { stream: stream} });
-        } 
-    },
+  methods: {
+    redirect(stream){ 
+      this.$router.push({ name: "onestream", params: { stream: stream} });
+    } 
+  },
 
-    mounted() {
+  mounted() {
     this.$store.dispatch('streams/BEGIN_FETCH_TOPSTREAMS',10);
   }
 }
 </script>
 
 <style>
-    .pointer { cursor: pointer; }
+  .pointer { cursor: pointer; }
 
-    .dimitri-title {
+  .dimitri-title {
     font-family: 'dimitri';
     font-size: 8vh;
   }
