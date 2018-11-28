@@ -152,7 +152,11 @@ export default {
   data() {
     return {
       searchWord:"",
-      authServer: AUTH_SERVER_URL
+      authServer: AUTH_SERVER_URL,
+      fav: true,
+      menu: false,
+      message: false,
+      hints: true
     };
   },
   methods: {

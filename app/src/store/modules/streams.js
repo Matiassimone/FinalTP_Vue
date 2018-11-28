@@ -43,6 +43,11 @@ const module_streams = ({
       state.streamsByGameId.data = res.data
       state.streamsByGameId.pagination = res.pagination
     },
+    SUCCESS_FETCH_MORE_STREAMSBYGAMEID(state,res){      
+      state.streamsByGameId.loading = false;
+      state.streamsByGameId.data.push.apply(state.streamsByGameId.data, res.data)    
+      state.streamsByGameId.pagination = res.pagination
+    },
 
     SUCCESS_FETCH_STREAMBYUSERID(state, res){
       state.streamByUserId.loading = false;
@@ -105,6 +110,19 @@ const module_streams = ({
       getStreamByGameId(gameID, cant, cursor)
         .then(
           (res) => commit('SUCCESS_FETCH_STREAMSBYGAMEID', res)
+        )
+        .catch(
+          (err) => commit('FAILURE_FETCH_STREAMSBYGAMEID', err)
+        )
+    },
+
+    BEGIN_FETCH_MORE_STREAMSBYGAMEID({commit}, data) {
+
+      commit('BEGIN_FETCH_STREAMSBYGAMEID')
+
+      getStreamByGameId(data.gameID, data.cant, data.cursor)
+        .then(
+          (res) => commit('SUCCESS_FETCH_MORE_STREAMSBYGAMEID', res)
         )
         .catch(
           (err) => commit('FAILURE_FETCH_STREAMSBYGAMEID', err)

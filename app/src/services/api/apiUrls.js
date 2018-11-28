@@ -11,7 +11,7 @@ export const AUTH_SERVER_URL = 'http://localhost:3000/'
     }
     
     if (cursor) {
-        url += '?after=' + cursor;
+        url += '&after=' + cursor;
     }
     return url
   }
