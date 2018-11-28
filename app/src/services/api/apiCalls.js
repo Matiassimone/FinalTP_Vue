@@ -7,7 +7,8 @@ import {
     CLIENT_ID,
     GET_LOGGEDUSER_URL,
     GET_USERINFORMATIONBYNAME_URL,
-    GET_GAME_BY_NAME
+    GET_GAME_BY_NAME,
+    GET_GAME_BY_ID
 } from './apiUrls'
 
 // Handle HTTP errors since fetch won't.
@@ -42,6 +43,11 @@ export const getTopGames = (cant, cursor) => {
 
 export const getGameByName = (gameName) => {
     const url = GET_GAME_BY_NAME(gameName)
+    return apiCall(url)
+}
+
+export const getGameById = (gameID) => {
+    const url = GET_GAME_BY_ID(gameID)
     return apiCall(url)
 }
 

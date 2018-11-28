@@ -51,6 +51,7 @@ export default {
   },
 
   methods: {
+
     createURL() {
       if(!this.topStreams.loading) {
         let videoUrl = ('https://player.twitch.tv/?channel='+ this.topStreams.data[0].user_name);

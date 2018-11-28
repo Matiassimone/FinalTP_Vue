@@ -2,6 +2,15 @@
   <v-app class="limit-screen">
 
       <v-layout align-center justify-center column fill-height v-resize="onResize">
+          <div class="playing-game">
+            <v-avatar class="auto-fav"
+                size= 12vh
+            >
+                <img :src="addImageResolution(this.data[0].box_art_url)" alt="Game name">
+                <p class="title-game">{{this.data[0].name}}</p>
+            </v-avatar>
+        </div>
+        
         <v-layout align-center justify-center row>
 
             <iframe :src="createVideoURL()"  allowfullscreen="true" scrolling="no" :height= "windowVideoSize.y" :width= "windowVideoSize.x" ></iframe>
@@ -19,7 +28,7 @@ export default {
     name: 'onestream',
 
     mounted() {
-        this.$store.dispatch('streams/BEGIN_FETCH_STREAMBYUSERID',this.$route.params.stream.id);
+        this.$store.dispatch('games/BEGIN_FETCH_GAMES_BY_ID',this.$route.params.stream.game_id);
         this.onResize();
     },
 
@@ -37,7 +46,7 @@ export default {
     },
 
     computed: {
-        ...mapState('streams', ['topStreams']),
+        ...mapState('games', ['data', 'errors', 'loading'])
     },
 
     methods: {
@@ -54,11 +63,30 @@ export default {
             this.windowVideoSize = { x: window.innerWidth*0.5, y: window.innerHeight*0.6 }
             this.windowChatSize = { x: window.innerWidth*0.3, y: window.innerHeight*0.749 }
         },
+
+        addImageResolution(imgURL) {
+            let url = imgURL.replace('{width}x{height}','285x380');
+            return url;
+        }
     }
 }
 </script>
 
 <style>
+    .playing-game{
+        margin-top: 40vh;
+        position: fixed;
+    }
 
+    .title-game {
+        font-family: 'dimitri';
+        font-size: 5vh;
+        margin-bottom: 0;
+        position: fixed;
+    }
+
+    .auto-fav{
+        padding-left: 5vh;
+    }
 </style>
 
