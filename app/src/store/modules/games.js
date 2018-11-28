@@ -15,18 +15,22 @@ const module_games = ({
     SUCCESS_FETCH(state, res) {
       state.loading = false;
 
-      state.data = res.data
-      state.pagination = res.pagination
-    },
-    SUCCESS_FETCH_ADDING_MORE(state, res) {
-      state.loading = false;
-      state.data.push.apply(state.data, res.data)     
+      state.data = res.data;
       state.pagination = res.pagination;
+    },
+
+    SUCCESS_FETCH_ADDING_MORE(state, res) {
+      let newData = res.data;
+      
+      state.data.push.apply(state.data, newData);     
+      state.pagination = res.pagination;
+      state.loading = false;
     },
 
     FAILURE_FETCH(state, err) {
       state.loading = false;
       state.errors = err;
+
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)
     },
@@ -38,22 +42,27 @@ const module_games = ({
 
   actions: {
     BEGIN_FETCH_GAMES({ commit }, cant, cursor) {
+
       commit('BEGIN_FETCH')
+
       getTopGames(cant, cursor)
         .then(
           (res) => {
+
             if (!cursor) {
+
               return commit('SUCCESS_FETCH', res)
-            } else {
-              return commit('SUCCESS_FETCH_ADDING_MORE', res)
             }
           })
         .catch(
           (err) => commit('FAILURE_FETCH', err)
         )
     },
+
     BEGIN_FECH_MORE_GAMES({ commit }, cursor) {
+
       commit('BEGIN_FETCH')
+
       getTopGames(50, cursor)
         .then(
           (res) => commit('SUCCESS_FETCH_ADDING_MORE', res)
