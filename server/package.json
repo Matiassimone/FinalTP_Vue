@@ -4,6 +4,7 @@
   "description": "Twitch API Authentication Example using Node, Express, and Passport.",
   "main": "index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "handlebars": "^4.0.6",

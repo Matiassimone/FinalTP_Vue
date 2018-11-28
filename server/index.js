@@ -16,6 +16,7 @@ var passport       = require('passport');
 var OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var request        = require('request');
 var handlebars     = require('handlebars');
+var cors           = require('cors');
 
 // Define our constants, you will change these with your own
 const TWITCH_CLIENT_ID = 'm9zae5i49wddds93axe6gobhr81iij';
@@ -29,6 +30,23 @@ app.use(session({secret: SESSION_SECRET, resave: false, saveUninitialized: false
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors({
+  'allowedHeaders': ['sessionId', 'Content-Type'],
+  'exposedHeaders': ['sessionId'],
+  'origin': '*',
+  'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  'preflightContinue': false
+}));
+
+/// UserLogged
+let user = {}
+
+
+////methods
+
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
 
 // Override passport profile function to get user profile from Twitch API
 OAuth2Strategy.prototype.userProfile = function(accessToken, done) {
@@ -86,26 +104,43 @@ app.get('/auth/twitch', passport.authenticate('twitch', { scope: 'user_read' }))
 // Set route for OAuth redirect
 app.get('/auth/twitch/callback', passport.authenticate('twitch', { successRedirect: '/', failureRedirect: '/' }));
 
-// Define a simple template to safely generate HTML with values from user's profile
-var template = handlebars.compile(`
-<html><head><title>Twitch Auth Sample</title></head>
-<table>
-    <tr><th>Access Token</th><td>{{accessToken}}</td></tr>
-    <tr><th>Refresh Token</th><td>{{refreshToken}}</td></tr>
-    <tr><th>Display Name</th><td>{{display_name}}</td></tr>
-    <tr><th>Bio</th><td>{{bio}}</td></tr>
-    <tr><th>Image</th><td>{{logo}}</td></tr>
-</table></html>`);
+
+app.get('auth/islogged:token', function(req, res) {
+  let isLogged=false;
+  if(req.session && req.session.passport && req.session.passport.user) {
+    if( request.params.token === req.session.passport.user.accessToken )
+      isLogged=true;
+  }
+  return res.send(JSON.stringify(isLogged))
+})
+
+app.get('/getloggeduser', function(req, res) {
+  if(!isEmpty(user)) {
+    return res.send(JSON.stringify(user));
+  }else
+    return res.status(401).send(JSON.stringify({error:'Sorry, you not have logged'}));
+})
+
+app.get('/logout', function(req, res) {
+  user = {}
+  return res.redirect('http://localhost:8080/');
+})
+
+
+
+
+
 
 // If user has an authenticated session, display it, otherwise display link to authenticate
 app.get('/', function (req, res) {
   if(req.session && req.session.passport && req.session.passport.user) {
-    res.send(template(req.session.passport.user));
+    user = req.session.passport.user;
+    res.redirect('http://localhost:8080/');
   } else {
     res.send('<html><head><title>Twitch Auth Sample</title></head><a href="/auth/twitch"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"></a></html>');
   }
 });
 
 app.listen(3000, function () {
-  console.log('Super TwitchClone listening on port 3000!')
+  console.log("\x1b[42m",'\n\n\n--------------------------------------------\n>>> Super Zwitch listening on port 3000! <<<\n--------------------------------------------\n\n\n')
 });
