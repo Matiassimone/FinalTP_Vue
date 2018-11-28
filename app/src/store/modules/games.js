@@ -43,7 +43,6 @@ const module_games = ({
         .then(
           (res) => {
             if (!cursor) {
-              console.log('hola')
               return commit('SUCCESS_FETCH', res)
             } else {
               return commit('SUCCESS_FETCH_ADDING_MORE', res)

@@ -47,9 +47,6 @@ export default {
       this.$router.push({ name: "streamsbygames", params: { gameId: id} });
     }, 
     onScroll (e) {
-      console.log(window.innerHeight + window.pageYOffset);
-      console.log(document.body.offsetHeight);
-
       if ((window.innerHeight + window.pageYOffset + 5) >= document.body.offsetHeight) {
         
         this.$store.dispatch('games/BEGIN_FECH_MORE_GAMES', this.pagination.cursor);
