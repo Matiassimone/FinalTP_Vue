@@ -114,5 +114,13 @@ export default {
         margin-right: 30px;
         display: -webkit-box;
     }
+
+    img.display-img {
+        display: -webkit-box;
+    }
+
+    i.v-icon.title-game.material-icons.theme--light.primary--text {
+        display: -webkit-box;
+    }   
 </style>
 

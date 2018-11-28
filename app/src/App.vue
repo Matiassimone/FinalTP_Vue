@@ -29,14 +29,14 @@
             </v-toolbar-items>
 
             <!--Search Field-->
-            <v-text-field
+            <v-text-field v-if="this.accessToken"
                 v-model="searchWord"
                 hide-details
                 prepend-icon="search"
                 single-line
                 placeholder="Search a user"
                 @keyup.enter="submit"
-             ></v-text-field>
+            ></v-text-field>
 
             <!--Divider-->
             <v-divider
