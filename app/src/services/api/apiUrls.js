@@ -22,6 +22,8 @@ export const GET_TOPGAMES_URL = (cant, cursor) => { //cursor is for obtein more 
     return validateParams(url, cant, cursor)
 };
 
+export const GET_GAME_BY_NAME = (gameName) => SERVER_URL + 'games?name=' + gameName;
+
 export const GET_TOPSTREAMS_URL = (cant, cursor) => {
     let url = SERVER_URL + 'streams';
 
@@ -40,5 +42,8 @@ export const GET_STREAMSBYGAMEID_URL = (gameID, cant, cursor) => {
 export const GET_STREAMBYUSERID_URL = (userID) => SERVER_URL + 'streams?user_id=' + userID;
 
 export const GET_USERINFORMATION_URL = (userID) => SERVER_URL + 'users?id=' + userID;
+
+export const GET_USERINFORMATIONBYNAME_URL = (userName) => SERVER_URL + 'users?login=' + userName;
+
 
 export const GET_LOGGEDUSER_URL = () => AUTH_SERVER_URL + 'getloggeduser'

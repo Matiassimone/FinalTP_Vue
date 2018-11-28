@@ -1,4 +1,4 @@
-import { getTopGames } from '../../services/api/apiCalls'
+import { getTopGames, getGameByName } from '../../services/api/apiCalls'
 
 const module_games = ({
     
@@ -43,6 +43,19 @@ const module_games = ({
         .catch(
           (err) => commit('FAILURE_FETCH', err)
         )
+    },
+    BEGIN_FETCH_GAMES_BY_NAME({commit}, gameName){
+
+      commit('BEGIN_FETCH')
+
+      getGameByName( gameName )
+        .then(
+          (res) => commit('SUCCESS_FETCH', res)
+        )
+        .catch(
+          (err) => commit('FAILURE_FETCH', err)
+        )
+
     }
   },
 

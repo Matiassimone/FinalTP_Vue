@@ -5,6 +5,7 @@ import Login from './views/Login.vue'
 import StreamsByGames from './views/StreamsByGames.vue'
 import OneStream from './views/OneStream.vue'
 import TopStreams from './views/TopStreams.vue'
+import SearchResults from './views/SearchResults.vue'
 import store from './store'
 
 Vue.use(Router)
@@ -37,6 +38,11 @@ const router = new Router({
       path: '/topstreams',
       name: 'topstreams',
       component: TopStreams
+    },
+    {
+      path: '/searchresults',
+      name: 'searchresults',
+      component: SearchResults
     }
   ]
 })
