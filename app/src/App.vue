@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-toolbar light app>
+        <v-toolbar light app id="toolbar">
 
             <!--Logo Field-->
             <router-link to="/">
@@ -134,7 +134,6 @@
                     <a :href="authServer+'auth/twitch'"><img src="http://ttv-api.s3.amazonaws.com/assets/connect_dark.png"></a>
                 </div>
             </div>
-
         </v-toolbar>
         <router-view/>
     </v-app>
@@ -230,12 +229,8 @@ figure:hover {
     text-decoration: none;
 }
 
-.hola{
-    background-color: #6441A4;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    width: 20vw;
+#toolbar{
+    box-shadow: 0px 2px 4px -1px rgba(137, 0, 255, 0.2), 0px 4px 5px 0px rgba(59, 2, 255, 0.14), 0px 1px 10px 0px rgba(76, 0, 255, 0.12);
 }
 
 </style>

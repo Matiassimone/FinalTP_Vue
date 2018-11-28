@@ -43,10 +43,13 @@ const module_streams = ({
       state.streamsByGameId.data = res.data
       state.streamsByGameId.pagination = res.pagination
     },
-    SUCCESS_FETCH_MORE_STREAMSBYGAMEID(state,res){      
-      state.streamsByGameId.loading = false;
-      state.streamsByGameId.data.push.apply(state.streamsByGameId.data, res.data)    
+
+    SUCCESS_FETCH_MORE_STREAMSBYGAMEID(state,res){   
+      let newData = res.data   
+      
+      state.streamsByGameId.data.push.apply(state.streamsByGameId.data, newData)    
       state.streamsByGameId.pagination = res.pagination
+      state.streamsByGameId.loading = false;
     },
 
     SUCCESS_FETCH_STREAMBYUSERID(state, res){

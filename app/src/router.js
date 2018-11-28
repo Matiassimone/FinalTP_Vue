@@ -48,7 +48,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
   if (to.name !== "login") {
     if (!store.state.user.accessToken) {
       next("/");

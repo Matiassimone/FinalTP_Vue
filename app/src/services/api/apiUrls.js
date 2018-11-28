@@ -24,6 +24,8 @@ export const GET_TOPGAMES_URL = (cant, cursor) => { //cursor is for obtein more 
 
 export const GET_GAME_BY_NAME = (gameName) => SERVER_URL + 'games?name=' + gameName;
 
+export const GET_GAME_BY_ID = (gameId) => SERVER_URL + 'games?id=' + gameId;
+
 export const GET_TOPSTREAMS_URL = (cant, cursor) => {
     let url = SERVER_URL + 'streams';
 
