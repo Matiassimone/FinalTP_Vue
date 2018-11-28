@@ -1,39 +1,32 @@
 <template>
-<v-content>
-  <v-layout>
-    <v-flex lg12  class="default">
-        <h2>Users Results For : {{this.$route.params.searchWord}}</h2>
-      <v-container grid-list-xl fluid>
-        <v-layout row wrap>
-          <v-flex
-              v-for="user in userData"
-              :key="user.id"
-              md2
-          >
-          <div @click="redirect(user.id)" class="pointer">
-            <UserCard :user=user />
+  <v-content class="margin">
+      <v-layout row="true">
+    <v-layout>
+      <v-flex offset-(size)(0-12)="1"></v-flex>
+      <v-flex>
+          
+        <h1>Users Results For : {{this.$route.params.searchWord}}</h1>
+
+        <v-flex v-for="user in userData" :key="user.id" md6>
+          <div @click="redirect(user.id)" >
+            <UserCard :user="user"/>
           </div>
-          </v-flex>
-        </v-layout>
-      </v-container>  
-      <h2>Games Results For : {{this.$route.params.searchWord}}</h2>
-      <v-container grid-list-xl fluid>
-        <v-layout row wrap>
-          <v-flex
-              v-for="game in gamesData"
-              :key="game.id"
-              md3
-          >
+        </v-flex>
+      </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex>
+        <h1>Games Results For : {{this.$route.params.searchWord}}</h1>
+
+        <v-flex v-for="game in gamesData" :key="game.id" md3>
           <div @click="redirect(game.id)" class="pointer">
-            <OneGame :game=game />
+            <OneGame :game="game"/>
           </div>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-flex>  
-  </v-layout>
+        </v-flex>
+      </v-flex>
+    </v-layout>
+      </v-layout>
   </v-content>
-    
 </template>
 <script>
 import UserCard from '../components/UserCard.vue'
@@ -54,7 +47,10 @@ export default {
     redirect(id){ 
         console.log(id)
       this.$router.push({ name: "streamsbygames", params: { gameId: id} });
-    } 
+    },
+    onResize: function () {
+            this.windowSize = { x: window.innerWidth*1, y: window.innerHeight*12 }
+        }, 
 
   },
   
@@ -65,5 +61,8 @@ export default {
 }
 </script>
 <style>
+.margin{
+    margin-top: 5vh;
+}
 
 </style>
