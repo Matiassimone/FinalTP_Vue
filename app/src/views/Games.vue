@@ -1,5 +1,6 @@
 <template>
 <v-content fluid>
+  <LoaderBar :isLoading="loading"/>
   <v-layout v-scroll="onScroll">
     <v-flex md12 class="default">
       <v-container grid-list-xl fluid>
@@ -23,6 +24,8 @@
 <script>
 import { mapState } from 'vuex'
 import OneGame from '../components/OneGameCard.vue'
+import LoaderBar from '../components/LoaderBar.vue'
+
 export default {
   name: 'games',
   data() {
@@ -35,7 +38,8 @@ export default {
     }
   },
   components:{
-    OneGame
+    OneGame,
+    LoaderBar
   },
   computed: {
     ...mapState('games', ['data', 'errors', 'loading', 'pagination'])

@@ -1,6 +1,6 @@
 <template>
   <v-app class="limit-screen">
-
+      
       <v-layout align-center justify-center column fill-height v-resize="onResize">
 
         <div class="playing-game" @click="redirect()">
@@ -100,8 +100,8 @@ export default {
     }
 
     .display-img{
+        margin-right: 30px;
         display: -webkit-box;
-        margin-right: 30px
     }
 </style>
 
