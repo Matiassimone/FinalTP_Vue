@@ -20,7 +20,7 @@
         </v-layout>
       </v-layout>
 
-     <iframe  :src="addImageResolution()" allowfullscreen="true" scrolling="no" :height= "windowSize.y"   :width= "windowSize.x"  ></iframe>
+     <iframe  :src="createURL()" allowfullscreen="true" scrolling="no" :height= "windowSize.y"   :width= "windowSize.x"  ></iframe>
 
   </v-app>
 </template>
@@ -39,10 +39,6 @@ export default {
   
   data() {
     return {
-      user: "",
-      password: "",
-      videoUrl: "",
-
       windowSize: {
         x: 0,
         y: 0
@@ -52,16 +48,10 @@ export default {
 
   computed: {
     ...mapState('streams', ['topStreams']),
-
-
   },
 
   methods: {
-    login() {
-      this.$router.push({ name: "games" });
-    },
-
-    addImageResolution() {
+    createURL() {
       if(!this.topStreams.loading) {
         let videoUrl = ('https://player.twitch.tv/?channel='+ this.topStreams.data[0].user_name);
         return videoUrl
@@ -71,17 +61,8 @@ export default {
     onResize: function () {
         this.windowSize = { x: window.innerWidth*1, y: window.innerHeight*12 }
     }
-
   }
 };
-
-
-
-/*        <v-flex align-self-center justify-center>   
-            <input v-model="user" type="text" placeholder="Usuario">
-            <input v-model="password" type="password" placeholder="Password">
-            <button @click="login">Ingresar</button>
-        </v-flex> */
 </script>
 
 <style>
