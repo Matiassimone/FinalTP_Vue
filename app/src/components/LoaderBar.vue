@@ -5,18 +5,7 @@
 <script>
 export default {
     name: "loaderBar",
-
-    data: function () {
-        return {
-
-           
-        }
-    },
-
-    props: ["isLoading"], 
-    methods: {
-
-    }
+    props: ["isLoading"]
 }
 </script>
 

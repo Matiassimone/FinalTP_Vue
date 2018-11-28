@@ -1,5 +1,6 @@
 <template>
   <v-content fluid>
+    <LoaderBar :isLoading="streamsByGameId.loading"/>
     <v-layout v-scroll="onScroll">
       <v-flex md12 class="default">
         <v-container grid-list-xl fluid>
@@ -23,12 +24,14 @@
 <script>
 import { mapState } from 'vuex'
 import OneStreamCard from '../components/OneStreamCard.vue'
+import LoaderBar from '../components/LoaderBar.vue'
 
 export default {    
     name: 'streamsbygames',
 //data.gameID, data.cant, data.cursor
     components:{
-        OneStreamCard
+        OneStreamCard,
+        LoaderBar
     },
 
     computed: {

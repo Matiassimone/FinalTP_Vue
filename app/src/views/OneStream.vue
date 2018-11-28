@@ -1,35 +1,42 @@
 <template>
   <v-app class="limit-screen">
-      
-      <v-layout align-center justify-center column fill-height v-resize="onResize">
+      <v-content fluid>
+        <LoaderBar :isLoading="loading"/>
+        <v-layout align-center justify-center column fill-height v-resize="onResize" class="adjust-content">
+            
+            <div class="playing-game" @click="redirect()">
+                <v-avatar class="auto-fav"
+                    size= 12vh>
 
-        <div class="playing-game" @click="redirect()">
-            <v-avatar class="auto-fav"
-                size= 12vh>
+                    <img :src="addImageResolution(this.data[0].box_art_url)" alt="Game name" class="display-img">
+                    
+                    <v-icon class="title-game"
+                    color="primary"
+                    >{{this.data[0].name}}</v-icon>
+                </v-avatar>
+            </div>
+            
+            <v-layout align-center justify-center row>
 
-                <img :src="addImageResolution(this.data[0].box_art_url)" alt="Game name" class="display-img">
-                
-                <v-icon class="title-game"
-                color="primary"
-                >{{this.data[0].name}}</v-icon>
-            </v-avatar>
-        </div>
-        
-        <v-layout align-center justify-center row>
+                <iframe :src="createVideoURL()"  allowfullscreen="true" scrolling="no" :height= "windowVideoSize.y" :width= "windowVideoSize.x" ></iframe>
+                <iframe :src="createChatURL()" frameborder="0" scrolling="0" :height= "windowChatSize.y" :width= "windowChatSize.x"></iframe>
 
-            <iframe :src="createVideoURL()"  allowfullscreen="true" scrolling="no" :height= "windowVideoSize.y" :width= "windowVideoSize.x" ></iframe>
-            <iframe :src="createChatURL()" frameborder="0" scrolling="0" :height= "windowChatSize.y" :width= "windowChatSize.x"></iframe>
-
+            </v-layout>
         </v-layout>
-      </v-layout>
+      </v-content>
   </v-app>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import LoaderBar from '../components/LoaderBar.vue'
 
 export default {
     name: 'onestream',
+
+    components:{
+        LoaderBar
+    },
 
     mounted() {
         this.$store.dispatch('games/BEGIN_FETCH_GAMES_BY_ID',this.$route.params.stream.game_id);
@@ -82,6 +89,10 @@ export default {
 </script>
 
 <style>
+    .adjust-content {
+        margin-top: -6vh;
+    }
+
     .playing-game{
         margin-top: 40vh;
         position: fixed;

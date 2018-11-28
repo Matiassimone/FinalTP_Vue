@@ -1,8 +1,10 @@
 <template>
   <v-content fluid>
+    <LoaderBar :isLoading="topStreams.loading"/>
     <v-layout>
-      <v-flex md12 class="default">
+      <v-flex md12>
         <v-container grid-list-xl fluid>
+          
           <v-layout row wrap>
             <v-flex
                 v-for="stream in topStreams.data"
@@ -24,9 +26,14 @@
 <script>
 import { mapState } from 'vuex'
 import OneStreamCard from '../components/OneStreamCard.vue'
+import LoaderBar from '../components/LoaderBar.vue'
 
 export default {
     name: 'topstreams',
+
+    components:{
+      LoaderBar
+    },
 
     components:{
         OneStreamCard
@@ -55,5 +62,4 @@ export default {
     font-family: 'dimitri';
     font-size: 8vh;
   }
-
 </style>
