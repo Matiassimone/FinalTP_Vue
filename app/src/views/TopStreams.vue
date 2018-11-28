@@ -9,6 +9,7 @@
                 :key="stream.id"
                 md3
             >
+            <p class="dimitri-title">{{topStreams.data.indexOf(stream) +1}} #</p>
             <div @click="redirect(stream)" class="pointer">
               <OneStreamCard :stream=stream />
             </div>
@@ -32,7 +33,7 @@ export default {
     },
 
     computed: {
-        ...mapState('streams', ['streamsByGameId'])
+        ...mapState('streams', ['topStreams'])
     },
 
     methods: {
@@ -49,4 +50,10 @@ export default {
 
 <style>
     .pointer { cursor: pointer; }
+
+    .dimitri-title {
+    font-family: 'dimitri';
+    font-size: 8vh;
+  }
+
 </style>
