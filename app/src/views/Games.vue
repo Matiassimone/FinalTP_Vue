@@ -1,6 +1,6 @@
 <template>
 <v-content fluid>
-  <v-layout>
+  <v-layout v-scroll="onScroll">
     <v-flex md12 class="default">
       <v-container grid-list-xl fluid>
         <v-layout row wrap>
@@ -24,19 +24,37 @@
 import { mapState } from 'vuex'
 import OneGame from '../components/OneGameCard.vue'
 export default {
-
   name: 'games',
+  data() {
+    return {
+      offsetTop: 0,
+      windowSize: {
+        x: 0,
+        y: 0
+      }
+    }
+  },
   components:{
     OneGame
   },
   computed: {
-    ...mapState('games', ['data', 'errors', 'loading'])
+    ...mapState('games', ['data', 'errors', 'loading', 'pagination'])
+    
   },
 
   methods: {
     redirect(id){ 
       this.$router.push({ name: "streamsbygames", params: { gameId: id} });
-    } 
+    }, 
+    onScroll (e) {
+      console.log(window.innerHeight + window.pageYOffset);
+      console.log(document.body.offsetHeight);
+
+      if ((window.innerHeight + window.pageYOffset + 5) >= document.body.offsetHeight) {
+        
+        this.$store.dispatch('games/BEGIN_FECH_MORE_GAMES', this.pagination.cursor);
+      }
+    }
 
   },
   
