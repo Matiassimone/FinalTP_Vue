@@ -1,43 +1,47 @@
 <template>
-  <v-content class="margin">
-      <v-layout row="true">
-    <v-layout>
-      <v-flex offset-(size)(0-12)="1"></v-flex>
-      <v-flex>
-          
-        <h1>Users Results For : {{this.$route.params.searchWord}}</h1>
+  <v-content fluid>
+    <v-layout align-center justify-center row>
 
-        <v-flex v-for="user in userData" :key="user.id" md6>
-          <div @click="redirect(user.id)" >
+      <v-layout align-center justify-center class="half-screen">
+        <v-flex align-center justify-center row> 
+          <p class="title-result">/ Users Results /</p>
+
+          <v-flex v-for="user in userData" :key="user.id" md6>
             <UserCard :user="user"/>
-          </div>
+          </v-flex>
         </v-flex>
-      </v-flex>
-    </v-layout>
-    <v-layout>
-      <v-flex>
-        <h1>Games Results For : {{this.$route.params.searchWord}}</h1>
-
-        <v-flex v-for="game in gamesData" :key="game.id" md3>
-          <div @click="redirect(game.id)" class="pointer">
-            <OneGame :game="game"/>
-          </div>
-        </v-flex>
-      </v-flex>
-    </v-layout>
       </v-layout>
+
+      <v-layout align-center justify-center class="half-screen">
+        <v-flex align-center justify-center row>
+          <p class="title-result">/ Games Results /</p>
+
+          <v-flex v-for="game in gamesData" :key="game.id" md3>
+            <div @click="redirect(game.id)" class="pointer">
+              <OneGame :game="game"/>
+            </div>
+          </v-flex>
+        </v-flex>
+      </v-layout>
+
+    </v-layout>
   </v-content>
 </template>
+
 <script>
 import UserCard from '../components/UserCard.vue'
 import OneGame from '../components/OneGameCard.vue'
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
+
 export default {
+
    name: "searchresults",
-   components:{
+
+   components: {
     UserCard,
     OneGame
   },
+
   computed: {
     ...mapState('games', { gamesData: games => games.data , gamesErrors: games => games.errors, gamesLoading: games => games.loading }),
     ...mapState('usersRequest', { userData: usersRequest => usersRequest.users , userErrors: usersRequest => usersRequest.errors, userLoading: usersRequest => usersRequest.loading })
@@ -45,13 +49,8 @@ export default {
 
   methods: {
     redirect(id){ 
-        console.log(id)
       this.$router.push({ name: "streamsbygames", params: { gameId: id} });
-    },
-    onResize: function () {
-            this.windowSize = { x: window.innerWidth*1, y: window.innerHeight*12 }
-        }, 
-
+    }
   },
   
   mounted() {
@@ -60,9 +59,25 @@ export default {
   }
 }
 </script>
+
 <style>
-.margin{
-    margin-top: 5vh;
-}
+  .title-result{
+    text-align: center;
+    color: #6441c8;
+    z-index: 2;
+    font-size: 5vh;
+    font-family: 'dimitri';
+    background-color: rgba(111, 53, 161, 0.082);
+    box-shadow: 0px 2px 4px -1px rgba(137, 0, 255, 0.2), 0px 4px 5px 0px rgba(59, 2, 255, 0.14), 0px 1px 10px 0px rgba(76, 0, 255, 0.12);
+  }
+
+  .half-screen{
+    width: 40vw;
+    margin: 5vw;
+    padding-top: 0;
+    align-items: center;
+  }
+
+
 
 </style>
