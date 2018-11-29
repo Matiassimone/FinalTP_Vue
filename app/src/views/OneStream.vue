@@ -23,7 +23,7 @@
 
             </v-layout>
         </v-layout>
-        <v-alert v-if="errors"
+        <v-alert v-if="errors.length > 0"
         :value="true"
         color="error"
         icon="warning"

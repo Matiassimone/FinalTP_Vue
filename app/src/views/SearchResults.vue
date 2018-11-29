@@ -25,7 +25,7 @@
       </v-layout>
 
     </v-layout>
-    <v-alert v-if="gamesErrors"
+    <v-alert v-if="gamesErrors.length > 0"
       :value="true"
       color="error"
       icon="warning"

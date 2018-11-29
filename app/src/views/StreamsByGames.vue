@@ -18,7 +18,7 @@
         </v-container>  
       </v-flex>  
     </v-layout>
-    <v-alert v-if="streamsByGameId.errors"
+    <v-alert v-if="streamsByGameId.errors.length > 0 "
       :value="true"
       color="error"
       icon="warning"
