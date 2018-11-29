@@ -23,6 +23,18 @@
 
             </v-layout>
         </v-layout>
+        <v-alert v-if="errors"
+        :value="true"
+        color="error"
+        icon="warning"
+        outline
+        transition="scale-transition"
+        >
+        Ups! we have the next error: 
+    
+        {{errors[0].message}}
+    
+        </v-alert>
       </v-content>
   </v-app>
 </template>

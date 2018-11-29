@@ -25,6 +25,30 @@
       </v-layout>
 
     </v-layout>
+    <v-alert v-if="gamesErrors"
+      :value="true"
+      color="error"
+      icon="warning"
+      outline
+      transition="scale-transition"
+    >
+    Ups! we have the next error: 
+    
+      {{gamesErrors[0].message}}
+    
+    </v-alert>
+    <v-alert v-if="userErrors"
+      :value="true"
+      color="error"
+      icon="warning"
+      outline
+      transition="scale-transition"
+    >
+    Ups! we have the next error: 
+    
+      {{userErrors[0].message}}
+    
+    </v-alert>
   </v-content>
 </template>
 

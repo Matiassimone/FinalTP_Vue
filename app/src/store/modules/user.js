@@ -41,7 +41,7 @@ const module_user = ({
 
     FAILURE_FETCH(state, err){
       state.loading = false;
-      state.errors = err;
+      state.errors.push(err);
     },
 
     BEGIN_FETCH(state){

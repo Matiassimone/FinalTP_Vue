@@ -33,13 +33,14 @@ const module_streams = ({
     SUCCESS_FETCH_TOPSTREAMS(state, res){
       state.topStreams.loading = false;
 
-      state.topStreams.data = res.data
+      state.topStreams.data = res.data;
+      state.topStreams.errors = []
       state.topStreams.pagination = res.pagination
     },
 
     SUCCESS_FETCH_STREAMSBYGAMEID(state, res){
       state.streamsByGameId.loading = false;
-
+      state.streamsByGameId.errors = [];    
       state.streamsByGameId.data = res.data
       state.streamsByGameId.pagination = res.pagination
     },
@@ -49,12 +50,13 @@ const module_streams = ({
       
       state.streamsByGameId.data.push.apply(state.streamsByGameId.data, newData)    
       state.streamsByGameId.pagination = res.pagination
+      state.streamsByGameId.errors = []
       state.streamsByGameId.loading = false;
     },
 
     SUCCESS_FETCH_STREAMBYUSERID(state, res){
       state.streamByUserId.loading = false;
-
+      state.streamsByGameId.errors = [];
       state.streamByUserId.data = res.data
       state.streamByUserId.pagination = res.pagination
     },
@@ -62,21 +64,21 @@ const module_streams = ({
 
     FAILURE_FETCH_TOPSTREAMS(state, err){
       state.topStreams.loading = false;
-      state.topStreams.errors = err;
+      state.topStreams.errors.push(err);
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)
     },
 
     FAILURE_FETCH_STREAMSBYGAMEID(state, err){
       state.streamsByGameId.loading = false;
-      state.streamsByGameId.errors = err
+      state.streamsByGameId.errors.push(err)
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)
     },
 
     FAILURE_FETCH_STREAMBYUSERID(state, err){
       state.streamByUserId.loading = false;
-      state.streamByUserId.errors = err;
+      state.streamByUserId.errors.push(err);
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)
     },

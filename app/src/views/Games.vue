@@ -20,6 +20,18 @@
         </v-container>  
       </v-flex>
     </v-layout>
+    <v-alert v-if="errors.length > 0"
+      :value="true"
+      color="error"
+      icon="warning"
+      outline
+      transition="scale-transition"
+    >
+    Ups! we have the next error: 
+    
+      {{errors[0].message}}
+    
+    </v-alert>
   </v-content>
 </template>
 
@@ -69,6 +81,7 @@ export default {
   
   mounted() {
     this.$store.dispatch('games/BEGIN_FETCH_GAMES',50);
+    console.log(this.errors)
   }
 }
 </script>

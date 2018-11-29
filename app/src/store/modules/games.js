@@ -16,6 +16,7 @@ const module_games = ({
       state.loading = false;
 
       state.data = res.data;
+      state.errors = []
       state.pagination = res.pagination;
     },
 
@@ -29,7 +30,7 @@ const module_games = ({
 
     FAILURE_FETCH(state, err) {
       state.loading = false;
-      state.errors = err;
+      state.errors.push(err);
 
       //Function handle error
       console.log("Ups, something bad has happened:   " + err)

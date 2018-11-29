@@ -14,11 +14,12 @@ const module_users_request = ({
     SUCCESS_FETCH(state, res){
       state.loading = false;
       state.users = res.data
+      state.errors = []
     },
 
     FAILURE_FETCH(state, err){
       state.loading = false;
-      state.errors = err;
+      state.errors.push(err);
     },
 
     BEGIN_FETCH(state){

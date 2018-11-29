@@ -18,6 +18,18 @@
         </v-container>  
       </v-flex>  
     </v-layout>
+    <v-alert v-if="streamsByGameId.errors"
+      :value="true"
+      color="error"
+      icon="warning"
+      outline
+      transition="scale-transition"
+    >
+    Ups! we have the next error: 
+    
+      {{streamsByGameId.errors[0].message}}
+    
+    </v-alert>
   </v-content>
 </template>
 
