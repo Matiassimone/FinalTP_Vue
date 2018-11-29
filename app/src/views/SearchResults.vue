@@ -37,7 +37,7 @@
       {{gamesErrors[0].message}}
     
     </v-alert>
-    <v-alert v-if="userErrors"
+    <v-alert v-if="userErrors.length > 0"
       :value="true"
       color="error"
       icon="warning"
